@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="draw_graphic">Draw graphic</string>
+    <string name="enter_points_count">Enter points count</string>
+    <string name="welcome">Welcome</string>
+</resources>

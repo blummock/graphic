@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/graphic_nav_graph"
+    app:route="graphic_nav_graph"
+    app:startDestination="@id/graphicFragment">
+    <fragment
+        android:id="@+id/graphicFragment"
+        android:name="com.blummock.graphic.ui.GraphicFragment"
+        tools:layout="@layout/fragment_graphic">
+        <deepLink
+            android:id="@+id/graphicLink"
+            app:uri="graphicapp://graphic/{pointsCount}" />
+        <argument
+            android:name="pointsCount"
+            app:argType="integer" />
+    </fragment>
+</navigation>
