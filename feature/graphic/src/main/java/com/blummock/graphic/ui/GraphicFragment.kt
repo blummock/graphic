@@ -23,12 +23,14 @@ internal class GraphicFragment : BaseFragment<FragmentGraphicBinding, GraphicVie
     override val bindingCallback: (LayoutInflater, ViewGroup?, Boolean) -> FragmentGraphicBinding
         get() = FragmentGraphicBinding::inflate
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val points = Destinations.GraphicDestination.getArgs(requireArguments()).pointsCount
+        viewModel.init(points)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        withBinding {
-            textView.text =
-                Destinations.GraphicDestination.getArgs(requireArguments()).pointsCount.toString()
-        }
         lifecycleScope.launch {
             viewModel.state
                 .flowWithLifecycle(lifecycle)

@@ -6,6 +6,5 @@ import javax.inject.Inject
 class GetPointsUseCase @Inject constructor(
     private val pointsRepository: PointsRepository,
 ) {
-
-    suspend operator fun invoke() = pointsRepository.getPoints()
+    suspend operator fun invoke(count: Int) = pointsRepository.getPoints(count)
 }

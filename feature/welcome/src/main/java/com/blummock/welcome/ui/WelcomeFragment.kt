@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.WindowCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.blummock.base.BaseFragment
+import com.blummock.core.Destinations
+import com.blummock.core.Router
+import com.blummock.core.RouterArgs
 import com.blummock.welcome.databinding.FragmentWelcomeBinding
 import com.blummock.welcome.vm.WelcomeViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -24,9 +26,15 @@ internal class WelcomeFragment : BaseFragment<FragmentWelcomeBinding, WelcomeVie
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        requireActivity().window.setSoftInputMode(android.view.WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         withBinding {
             startButton.setOnClickListener {
+                (requireActivity() as Router).navigate(
+                    Destinations.GraphicDestination.buildRoute(
+                        RouterArgs.GraphicArgs(
+                            countsInput.text.toString().toInt(),
+                        )
+                    )
+                )
                 viewModel.goToGraphic()
             }
             countsInput.doOnTextChanged { text, _, _, _ ->

@@ -13,9 +13,9 @@ internal class GraphicViewModel @Inject constructor(
 ) : BaseViewModel<GraphicState, GraphicEffect>(GraphicState()) {
 
 
-    init {
+    fun init(pointsCount: Int) {
         viewModelScope.launch {
-            val points = getPointsUseCase.invoke()
+            val points = getPointsUseCase.invoke(pointsCount)
             updateState {
                 it.copy(points = points)
             }
