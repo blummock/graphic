@@ -9,9 +9,11 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.fragment.NavHostFragment
 import com.blummock.randgraphic.databinding.ActivityMainBinding
-import com.blummock.router.Router
-import com.blummock.router.Routes
+import com.blummock.core.Router
+import com.blummock.core.Routes
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : Router, AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

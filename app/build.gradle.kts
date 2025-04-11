@@ -1,7 +1,13 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("org.jetbrains.kotlin.plugin.serialization")
+//    id("org.jetbrains.kotlin.plugin.serialization")
+    kotlin("kapt")
+    id("dagger.hilt.android.plugin")
+}
+
+kapt {
+    correctErrorTypes = true
 }
 
 android {
@@ -49,7 +55,8 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(project(":domain"))
     implementation(project(":base"))
-    implementation(project(":router"))
+    implementation(project(":core"))
+    implementation(project(":data"))
     implementation(project(":feature:welcome"))
     implementation(project(":feature:graphic"))
     implementation(libs.androidx.navigation.fragment)
@@ -57,5 +64,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.androidx.navigation.fragment.ktx)
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+//    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+    implementation(libs.dagger.hilt.android)
+    kapt(libs.dagger.hilt.android.compiler)
 }

@@ -5,12 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.blummock.base.BaseFragment
+import com.blummock.core.Destinations
 import com.blummock.graphic.databinding.FragmentGraphicBinding
 import com.blummock.graphic.vm.GraphicViewModel
-import com.blummock.router.Destinations
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
-class GraphicFragment : BaseFragment<FragmentGraphicBinding, GraphicViewModel>() {
+@AndroidEntryPoint
+internal class GraphicFragment : BaseFragment<FragmentGraphicBinding, GraphicViewModel>() {
 
     override val viewModel by viewModels<GraphicViewModel>()
 
@@ -22,6 +28,15 @@ class GraphicFragment : BaseFragment<FragmentGraphicBinding, GraphicViewModel>()
         withBinding {
             textView.text =
                 Destinations.GraphicDestination.getArgs(requireArguments()).pointsCount.toString()
+        }
+        lifecycleScope.launch {
+            viewModel.state
+                .flowWithLifecycle(lifecycle)
+                .collectLatest {
+                    withBinding {
+                        textView.text = it.points.toString()
+                    }
+                }
         }
     }
 }

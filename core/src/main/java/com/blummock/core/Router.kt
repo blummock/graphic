@@ -1,4 +1,4 @@
-package com.blummock.router
+package com.blummock.core
 
 interface Router {
 

@@ -1,5 +1,4 @@
-package com.blummock.router
-
+package com.blummock.core
 
 sealed interface Routes {
     data object Back : Routes

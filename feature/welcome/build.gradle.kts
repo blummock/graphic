@@ -45,7 +45,7 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     testImplementation(libs.junit)
     implementation(project(":base"))
-    implementation(project(":router"))
+    implementation(project(":core"))
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
