@@ -1,9 +1,9 @@
 package com.blummock.core.dispatcher
 
 import com.blummock.domain.dispatcher.DispatcherProvider
-import jakarta.inject.Singleton
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
+import javax.inject.Singleton
 
 @Singleton
 class DispatcherProviderImpl @Inject constructor() : DispatcherProvider {
