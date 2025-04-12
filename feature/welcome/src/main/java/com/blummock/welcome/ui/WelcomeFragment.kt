@@ -9,14 +9,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.blummock.base.BaseFragment
-import com.blummock.core.Destinations
-import com.blummock.core.Router
-import com.blummock.core.RouterArgs
 import com.blummock.welcome.databinding.FragmentWelcomeBinding
 import com.blummock.welcome.vm.WelcomeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import kotlin.system.exitProcess
 
+@AndroidEntryPoint
 internal class WelcomeFragment : BaseFragment<FragmentWelcomeBinding, WelcomeViewModel>() {
 
     override val viewModel by viewModels<WelcomeViewModel>()
@@ -27,14 +27,10 @@ internal class WelcomeFragment : BaseFragment<FragmentWelcomeBinding, WelcomeVie
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         withBinding {
+            toolbar.setNavigationOnClickListener {
+                exitProcess(0)
+            }
             startButton.setOnClickListener {
-                (requireActivity() as Router).navigate(
-                    Destinations.GraphicDestination.buildRoute(
-                        RouterArgs.GraphicArgs(
-                            countsInput.text.toString().toInt(),
-                        )
-                    )
-                )
                 viewModel.goToGraphic()
             }
             countsInput.doOnTextChanged { text, _, _, _ ->

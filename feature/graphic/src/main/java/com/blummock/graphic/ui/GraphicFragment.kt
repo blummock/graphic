@@ -8,7 +8,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.blummock.base.BaseFragment
-import com.blummock.core.Destinations
 import com.blummock.graphic.databinding.FragmentGraphicBinding
 import com.blummock.graphic.vm.GraphicViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,12 +24,16 @@ internal class GraphicFragment : BaseFragment<FragmentGraphicBinding, GraphicVie
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val points = Destinations.GraphicDestination.getArgs(requireArguments()).pointsCount
-        viewModel.init(points)
+        viewModel.init(requireArguments())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        withBinding {
+            toolbar.setNavigationOnClickListener {
+                viewModel.navigateBack()
+            }
+        }
         lifecycleScope.launch {
             viewModel.state
                 .flowWithLifecycle(lifecycle)

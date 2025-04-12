@@ -1,8 +1,18 @@
 package com.blummock.welcome.vm
 
 import com.blummock.base.BaseViewModel
+import com.blummock.base.destinations.Destinations
+import com.blummock.domain.provider.Provider
+import com.blummock.domain.router.RouterArgs
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-internal class WelcomeViewModel : BaseViewModel<WelcomeState, WelcomeEffect>(WelcomeState()) {
+
+@HiltViewModel
+internal class WelcomeViewModel @Inject constructor(
+    provider: Provider
+) : BaseViewModel<WelcomeState, WelcomeEffect>(WelcomeState(), provider) {
 
     fun setCount(count: String) {
         updateState {
@@ -12,7 +22,8 @@ internal class WelcomeViewModel : BaseViewModel<WelcomeState, WelcomeEffect>(Wel
 
     fun goToGraphic() {
         kotlin.runCatching {
-            state.value.pointsCount.toInt()
+            val count = state.value.pointsCount.toInt()
+            navigate(Destinations.GraphicDestination.buildRoute(RouterArgs.GraphicArgs(count)))
         }.onFailure {
             postErrorMessage("Incorrect input")
         }

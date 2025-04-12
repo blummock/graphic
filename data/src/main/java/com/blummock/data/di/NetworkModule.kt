@@ -9,6 +9,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -27,6 +28,9 @@ object NetworkModule {
                 level = HttpLoggingInterceptor.Level.BODY
             }
         )
+        .connectTimeout(60, TimeUnit.SECONDS)
+        .writeTimeout(60, TimeUnit.SECONDS)
+        .readTimeout(60, TimeUnit.SECONDS)
         .build()
 
     @Provides
@@ -35,13 +39,13 @@ object NetworkModule {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(client)
-            .addConverterFactory(MoshiConverterFactory.create()) // или GsonConverterFactory
+            .addConverterFactory(MoshiConverterFactory.create())
             .build()
     }
 
     @Provides
     @Singleton
-    fun provideUserApi(retrofit: Retrofit): PointsApi {
+    fun providePointsApi(retrofit: Retrofit): PointsApi {
         return retrofit.create(PointsApi::class.java)
     }
 }

@@ -1,6 +1,8 @@
-package com.blummock.core
+package com.blummock.base.destinations
 
 import android.os.Bundle
+import com.blummock.domain.router.RouterArgs
+import com.blummock.domain.router.Routes
 
 private const val DOMAIN = "graphicapp://"
 
