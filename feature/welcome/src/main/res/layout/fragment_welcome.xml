@@ -28,7 +28,8 @@
         android:layout_margin="40dp"
         android:hint="@string/enter_points_count"
         app:endIconMode="clear_text"
-        app:layout_constraintBottom_toTopOf="@+id/start_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appbar">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -36,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:imeOptions="actionNext"
+            android:imeOptions="actionGo"
             android:inputType="numberSigned"
             android:maxLength="3"
             android:maxLines="1"

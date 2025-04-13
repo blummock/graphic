@@ -13,6 +13,8 @@ import com.blummock.welcome.databinding.FragmentWelcomeBinding
 import com.blummock.welcome.vm.WelcomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlin.system.exitProcess
 
@@ -41,9 +43,11 @@ internal class WelcomeFragment : BaseFragment<FragmentWelcomeBinding, WelcomeVie
         lifecycleScope.launch {
             viewModel.state
                 .flowWithLifecycle(lifecycle)
+                .map { it.pointsCount }
+                .distinctUntilChanged()
                 .collectLatest {
                     withBinding {
-                        startButton.isEnabled = it.pointsCount.isNotBlank()
+                        startButton.isEnabled = it.isNotBlank()
                     }
                 }
         }

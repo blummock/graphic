@@ -1,16 +1,10 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    id("dagger.hilt.android.plugin")
-    kotlin("kapt")
-}
-
-kapt {
-    correctErrorTypes = true
 }
 
 android {
-    namespace = "com.blummock.graphic"
+    namespace = "com.blummock.uikit"
     compileSdk = 35
 
     defaultConfig {
@@ -18,10 +12,6 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildFeatures {
-        viewBinding = true
     }
 
     buildTypes {
@@ -43,17 +33,11 @@ android {
 }
 
 dependencies {
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    implementation(libs.androidx.navigation.fragment.ktx)
-    implementation(libs.androidx.navigation.ui.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation(libs.dagger.hilt.android)
-    kapt(libs.dagger.hilt.android.compiler)
-    implementation(project(":uikit"))
-    implementation(project(":domain"))
-    implementation(project(":base"))
 }

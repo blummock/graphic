@@ -57,6 +57,7 @@ dependencies {
     implementation(project(":base"))
     implementation(project(":core"))
     implementation(project(":data"))
+    implementation(project(":uikit"))
     implementation(project(":feature:welcome"))
     implementation(project(":feature:graphic"))
     implementation(libs.androidx.navigation.fragment)

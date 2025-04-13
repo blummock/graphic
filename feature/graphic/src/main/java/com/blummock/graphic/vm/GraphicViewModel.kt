@@ -1,5 +1,6 @@
 package com.blummock.graphic.vm
 
+import android.graphics.PointF
 import android.os.Bundle
 import com.blummock.base.BaseViewModel
 import com.blummock.base.destinations.Destinations
@@ -17,7 +18,8 @@ internal class GraphicViewModel @Inject constructor(
     fun init(args: Bundle) {
         launch {
             val pointsCount = Destinations.GraphicDestination.getArgs(args).pointsCount
-            val points = getPointsUseCase.invoke(pointsCount)
+            val points = getPointsUseCase.invoke(pointsCount).sortedBy { it.x }
+                .map { PointF(it.x, it.y) }
             updateState {
                 it.copy(points = points)
             }
