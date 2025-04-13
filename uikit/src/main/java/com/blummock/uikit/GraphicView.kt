@@ -61,12 +61,6 @@ class GraphicView @JvmOverloads constructor(
         isAntiAlias = true
     }
 
-    private val borderPaint = Paint().apply {
-        color = Color.BLACK
-        strokeWidth = 4f
-        style = Paint.Style.STROKE
-    }
-
     private val scaleGestureDetector =
         ScaleGestureDetector(context, object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
             override fun onScale(detector: ScaleGestureDetector): Boolean {
@@ -146,14 +140,6 @@ class GraphicView @JvmOverloads constructor(
 
         fun alignY(value: Float) =
             paddingTop + contentHeight - (value - minY) * scaleGraphY + offsetY
-
-        canvas.drawRect(
-            paddingLeft,
-            paddingTop,
-            paddingLeft + contentWidth,
-            paddingTop + contentHeight,
-            borderPaint
-        )
 
         canvas.drawLine(
             paddingLeft,
