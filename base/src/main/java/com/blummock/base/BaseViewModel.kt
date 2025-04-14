@@ -7,6 +7,7 @@ import com.blummock.domain.router.Routes
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -24,7 +25,7 @@ abstract class BaseViewModel<State, Effect : BaseEffect>(
     private val _state = MutableStateFlow(initialState)
     val state = _state.asStateFlow()
 
-    private val _effect = Channel<BaseEffect>(1)
+    private val _effect = Channel<BaseEffect>(20, BufferOverflow.DROP_OLDEST)
     val effect = _effect.receiveAsFlow()
 
     private val mainScope = CoroutineScope(
@@ -33,6 +34,12 @@ abstract class BaseViewModel<State, Effect : BaseEffect>(
             postErrorMessage(e.message ?: "Unknown error")
         }
     )
+
+    fun sendEffect(effect: Effect) {
+        launch {
+            _effect.send(effect)
+        }
+    }
 
     protected fun navigate(routes: Routes) {
         launch {

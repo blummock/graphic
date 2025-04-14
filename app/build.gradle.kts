@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-//    id("org.jetbrains.kotlin.plugin.serialization")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
 }
@@ -65,7 +64,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.androidx.navigation.fragment.ktx)
-//    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
     implementation(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.android.compiler)
 }

@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.eenglish.features.activity.MainActivity">
+    <item
+        android:id="@+id/action_save"
+        android:icon="@drawable/baseline_save_24"
+        android:orderInCategory="102"
+        android:title="@string/save"
+        app:showAsAction="ifRoom" />
+</menu>

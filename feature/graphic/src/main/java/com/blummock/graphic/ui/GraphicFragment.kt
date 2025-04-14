@@ -4,16 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import com.blummock.base.BaseEffect
 import com.blummock.base.BaseFragment
+import com.blummock.graphic.R
 import com.blummock.graphic.databinding.FragmentGraphicBinding
 import com.blummock.graphic.recycler.GridDividerItemDecoration
 import com.blummock.graphic.recycler.PointsAdapter
+import com.blummock.graphic.vm.GraphicEffect
 import com.blummock.graphic.vm.GraphicViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -55,6 +59,16 @@ internal class GraphicFragment : BaseFragment<FragmentGraphicBinding, GraphicVie
             toolbar.setNavigationOnClickListener {
                 viewModel.navigateBack()
             }
+            toolbar.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.action_save -> {
+                        viewModel.saveGraphic()
+                        true
+                    }
+
+                    else -> false
+                }
+            }
         }
         lifecycleScope.launch {
             viewModel.state
@@ -67,6 +81,17 @@ internal class GraphicFragment : BaseFragment<FragmentGraphicBinding, GraphicVie
                         adapter.submitList(points)
                     }
                 }
+        }
+    }
+
+    override fun handleEffect(effect: BaseEffect) {
+        when (effect) {
+            is GraphicEffect.SaveGraphic -> {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.saved, effect.fileName), Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 }

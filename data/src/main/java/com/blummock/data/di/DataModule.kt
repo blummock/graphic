@@ -9,7 +9,7 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-interface DataModule {
+internal interface DataModule {
 
     @Binds
     fun providePointsRepository(impl: PointsRepositoryImpl): PointsRepository

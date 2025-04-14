@@ -44,8 +44,11 @@ abstract class BaseFragment<B : ViewBinding, VM : BaseViewModel<*, *>> : Fragmen
                         is BaseEffect.ErrorEffect -> {
                             Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                         }
+                        else -> handleEffect(it)
                     }
                 }
         }
     }
+
+    protected open fun handleEffect(effect: BaseEffect) = Unit
 }

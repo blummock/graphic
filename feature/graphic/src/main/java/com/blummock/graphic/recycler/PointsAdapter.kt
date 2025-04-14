@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.blummock.graphic.databinding.ItemPointBinding
 
-class PointsAdapter : ListAdapter<PointF, PointsAdapter.PointsViewHolder>(
+internal class PointsAdapter : ListAdapter<PointF, PointsAdapter.PointsViewHolder>(
     object : DiffUtil.ItemCallback<PointF>() {
         override fun areItemsTheSame(oldItem: PointF, newItem: PointF): Boolean {
             return oldItem == newItem

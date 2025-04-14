@@ -4,7 +4,7 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import androidx.recyclerview.widget.RecyclerView
 
-class GridDividerItemDecoration(
+internal class GridDividerItemDecoration(
     private val dividerSize: Int,
     private val dividerColor: Int
 ) : RecyclerView.ItemDecoration() {

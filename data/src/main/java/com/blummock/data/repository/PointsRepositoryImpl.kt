@@ -1,6 +1,7 @@
 package com.blummock.data.repository
 
 import com.blummock.data.api.PointsApi
+import com.blummock.data.mapper.toDomain
 import com.blummock.domain.entity.Point
 import com.blummock.domain.repository.PointsRepository
 import kotlinx.coroutines.Dispatchers
@@ -11,8 +12,8 @@ class PointsRepositoryImpl @Inject constructor(
     private val pointsApi: PointsApi
 ) : PointsRepository {
     override suspend fun getPoints(count: Int): List<Point> = withContext(Dispatchers.IO) {
-//        pointsApi.getPoints(count).toDomain()
-        pointsStub()
+        pointsApi.getPoints(count).toDomain()
+//        pointsStub()
     }
 
     private fun pointsStub() = listOf(
